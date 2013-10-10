@@ -27,6 +27,12 @@ upper = map toUpper
 trim :: String -> String
 trim = reverse . dropWhile isSpace . reverse . dropWhile isSpace
 
+-- | Limit the length of the string and ellipsize it.
+ellipsize :: Int -> [Char] -> [Char]
+ellipsize n xs
+  | length xs > n = take n $ take (max 1 (n-1)) xs ++ "…"
+  | otherwise     = xs
+
 -- | A class for converting to strings.
 class ToString a where
   toString :: a -> String
