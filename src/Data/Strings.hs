@@ -33,6 +33,14 @@ ellipsize n xs
   | length xs > n = take n $ take (max 1 (n-1)) xs ++ "…"
   | otherwise     = xs
 
+-- | Add a suffix to an integral.
+ordSuffix :: (Integral n) => n -> String
+ordSuffix n
+  | tens > 3 && tens < 21 = "th"
+  | otherwise = case n `mod` 10 of
+                  1 -> "st"; 2 -> "nd"; 3 -> "rd"; _ -> "th"
+  where tens = n `mod` 100
+
 -- | A class for converting to strings.
 class ToString a where
   toString :: a -> String
