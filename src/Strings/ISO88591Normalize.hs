@@ -1,4 +1,4 @@
-module Data.Strings.ISO88591Normalize where
+module Strings.ISO88591Normalize where
 
 import           Data.Char
 import           Data.Map   (Map)
