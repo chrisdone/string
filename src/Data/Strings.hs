@@ -24,7 +24,7 @@ upper :: String -> String
 upper = map toUpper
 
 -- | Trim a string.
-trim :: [Char] -> [Char]
+trim :: String -> String
 trim = reverse . dropWhile isSpace . reverse . dropWhile isSpace
 
 -- | A class for converting to strings.
