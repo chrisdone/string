@@ -4,7 +4,7 @@
 
 -- | Extra functions and classes for dealing with Strings.
 
-module Strings
+module Data.Strings
   (-- * Re-exports
    module Data.String
   ,module Data.Char
