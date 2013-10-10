@@ -5,15 +5,19 @@
 -- | Extra functions and classes for dealing with Strings.
 
 module Data.Strings
-  (module Data.String
+  (-- * Re-exports
+   module Data.String
   ,module Data.Char
+  -- * Data operations
   ,lower
   ,upper
   ,trim
   ,ellipsize
+  ,ellipsizeFromFront
   ,ordSuffix
   ,pad
   ,stringToMaybe
+  -- * Classes
   ,ToString(..))
   where
 
@@ -37,6 +41,14 @@ ellipsize :: Int -> String -> String
 ellipsize n xs
   | length xs > n = take n $ take (max 1 (n-1)) xs ++ "…"
   | otherwise     = xs
+
+-- | Limit the length of a string and ellipsize it if it goes over a
+-- certain length.
+ellipsizeFromFront :: Int -> String -> String
+ellipsizeFromFront n xs =
+  if length xs > n
+    then "…" ++ reverse (take (n-1) (reverse xs))
+    else xs
 
 -- | Add a suffix to an integral.
 ordSuffix :: (Integral n) => n -> String
