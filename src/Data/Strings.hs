@@ -1,3 +1,4 @@
+{-# LANGUAGE ViewPatterns #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE TypeSynonymInstances #-}
 
@@ -9,6 +10,10 @@ module Data.Strings
   ,lower
   ,upper
   ,trim
+  ,ellipsize
+  ,ordSuffix
+  ,pad
+  ,stringToMaybe
   ,ToString(..))
   where
 
@@ -40,6 +45,18 @@ ordSuffix n
   | otherwise = case n `mod` 10 of
                   1 -> "st"; 2 -> "nd"; 3 -> "rd"; _ -> "th"
   where tens = n `mod` 100
+
+-- | Pad the string with the given string.
+pad :: Int -- ^ Times.
+    -> String -- ^ Pad.
+    -> String -- ^ String.
+    -> String -- ^ Padded string.
+pad n c xs = take (n - length xs) (cycle c) ++ xs
+
+-- | If a trimmed string is empty, return nothing.
+stringToMaybe :: String -> Maybe String
+stringToMaybe (trim -> "") = Nothing
+stringToMaybe x            = Just x
 
 -- | A class for converting to strings.
 class ToString a where
